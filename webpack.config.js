@@ -45,6 +45,11 @@ var config = {
         loader: "style-loader!css-loader",
         exclude: /node_modules/,
       },
+
+      {
+        test: /\.(jpe?g|gif|png|svg)$/,
+        loader: "file-loader?name=./src/assets/[name].[ext]"
+      }
     ]
   }
 };

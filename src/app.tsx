@@ -1,22 +1,19 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Route, Link, Switch, Router, HashRouter } from 'react-router-dom';
-import {RegisterComponent} from './screens/welcome/RegisterComponent';
+import {WelcomeComponent} from './screens/welcome/WelcomeComponent';
 
 class App extends React.Component<any, any> {
 
   /*
-    To be implemented:
-    <Route path='/' component={Welcome}/>
-    <Route path='/manage' component={Manage}/>
-    <Route path='/contact' component={contact}/>
-    <Route path='/Settings' component={Settings}/>
+    TODO implement:
+    <Route path='/manage' component={Accounts}/>
   */
 
   render() {
     return(
       <Switch>
-        <Route path='/' component={RegisterComponent}/>
+        <Route path='/' component={WelcomeComponent}/>
       </Switch>
     );
   }
@@ -26,5 +23,5 @@ ReactDOM.render(
   <HashRouter>
     <App/>
   </HashRouter>,
-  document.getElementById("app")
+  document.getElementById('app')
 );

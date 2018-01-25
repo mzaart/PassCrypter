@@ -14,7 +14,7 @@ export class FormHeader extends React.Component<FormHeaderProps, any> {
   render() {
     return (
       <div className='text-center'>
-          <h3><i className={'mr-2 fa fa-' + this.props.icon}></i>{this.props.title}</h3>
+          <h3><i className={'mt-2 mr-2 fa fa-' + this.props.icon}></i>{this.props.title}</h3>
           <hr/>
       </div>
     );

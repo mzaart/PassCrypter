@@ -1,13 +1,15 @@
 import * as React from 'react';
-import {Field} from '../../components/Field';
-import {FormHeader} from '../../components/FormHeader';
-import {ErrorComponent} from '../../components/ErrorComponent';
-import {UserContract} from '../../mvp/user/UserContract';
-import presenterContainer from '../../di/PresenterContainer';
-import Types from '../../di/Types';
-import Validator from '../../utils/Validator'
+import {Field} from '../../../components/Field';
+import {FormHeader} from '../../../components/FormHeader';
+import {ErrorComponent} from '../../../components/ErrorComponent';
+import {UserContract} from '../../../mvp/user/UserContract';
+import presenterContainer from '../../../di/PresenterContainer';
+import Types from '../../../di/Types';
+import Validator from '../../../utils/Validator'
+import {LoginComponent} from './LogInComponent'
 
-export class RegisterComponent extends React.Component<any, any> implements UserContract.View {
+export class RegisterComponent extends React.Component<any, any>
+  implements UserContract.View {
 
   private userPresenter: UserContract.Presenter;
 
@@ -26,17 +28,18 @@ export class RegisterComponent extends React.Component<any, any> implements User
       emailValid: true,
       passValid: true,
       passConfirmValid: true,
+      displayLogin: false,
       displayError: false,
       error: ''
     }
   }
 
-  public saveToken(token: string) {
+  public saveToken = (token: string) => {
     // TODO save token
     console.log(token);
   }
 
-  public displayError(error: string) {
+  public displayError = (error: string) => {
     this.setState({
       error: error,
       displayError: true
@@ -97,9 +100,15 @@ export class RegisterComponent extends React.Component<any, any> implements User
     });
   }
 
+  private displayLogin = () => {
+    this.setState({ displayLogin: true });
+  }
+
   public render() {
     return (
-        <div className='col-lg-6'>
+      <div>
+        {this.state.displayLogin && <LoginComponent/>}
+        <div>
           <div className='card wow fadeInRight'>
             <div className='card-block'>
               <FormHeader title='Register' icon='user' />
@@ -108,7 +117,7 @@ export class RegisterComponent extends React.Component<any, any> implements User
               <Field
                 icon='envelope'
                 label='Your Email'
-                showLabel={!this.state.email}
+                showLabel={true}
                 onChange={this.updateEmail}
                 errorMsg='Invalid Email'
                 showError={!this.state.emailValid} />
@@ -116,7 +125,7 @@ export class RegisterComponent extends React.Component<any, any> implements User
               <Field
                 icon='user'
                 label='Your Name'
-                showLabel={!this.state.name}
+                showLabel={true}
                 onChange={this.updateName}
                 errorMsg='Invalid Name'
                 showError={!this.state.nameValid} />
@@ -125,7 +134,7 @@ export class RegisterComponent extends React.Component<any, any> implements User
                 icon='lock'
                 type='password'
                 label='Your Password'
-                showLabel={!this.state.pass}
+                showLabel={true}
                 onChange={this.updatePass}
                 errorMsg='Invalid Password'
                 showError={!this.state.passValid} />
@@ -134,7 +143,7 @@ export class RegisterComponent extends React.Component<any, any> implements User
                 icon='lock'
                 type='password'
                 label='Repeat Password'
-                showLabel={!this.state.passConfirm}
+                showLabel={true}
                 onChange={this.updateConfirmPass}
                 errorMsg='Passwords do not match'
                 showError={!this.state.passConfirmValid} />
@@ -158,13 +167,16 @@ export class RegisterComponent extends React.Component<any, any> implements User
               <div className='modal-footer'>
                   <div className='options  mx-auto'>
                       <p className='pt-1'>Already have an account?
-                        <a data-toggle='modal' data-target='#modalLogin' href='#' className='blue-text'>Log In</a>
+                        <a className='blue-text' onClick={this.displayLogin}>
+                          {' Log In'}
+                        </a>
                       </p>
                   </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     );
   }
 }
